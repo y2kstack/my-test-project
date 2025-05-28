@@ -17,7 +17,7 @@ jobs:
         env:
           BUNDLE_RUBYGEMS__PKG__GITHUB__COM: y2kstack:${{ secrets.MY_PAT }}
         run: |
-          bundle config set --global rubygems.pkg.github.com "$BUNDLE_RUBYGEMS__PKG__GITHUB__COM"
+          bundle config set --global rubygems.pkg.github.com/y2kstack "$BUNDLE_RUBYGEMS__PKG__GITHUB__COM"
       - name: Install dependencies
         run: |
           bundle install
