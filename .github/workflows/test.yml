@@ -15,7 +15,7 @@ jobs:
         bundler-cache: true
     - name: Configure GitHub Packages authentication
       run: |
-        bundle config set --global https://rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.GITHUB_TOKEN }}
+        bundle config set --global https://rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.PAT }}
     - name: Install dependencies
       run: |
         bundle install
