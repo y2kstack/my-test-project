@@ -15,9 +15,9 @@ jobs:
           bundler-cache: true # Enable caching for faster runs
       - name: Configure GitHub Packages authentication
         env:
-          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: y2kstack:${{ secrets.MY_PAT }}
+          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.MY_PAT }}
         run: |
-          bundle config set --global rubygems.pkg.github.com ${{ secrets.MY_PAT }}
+          bundle config set --global rubygems.pkg.github.com "$BUNDLE_RUBYGEMS__PKG__GITHUB__COM"
       - name: Install dependencies
         run: |
           bundle install
