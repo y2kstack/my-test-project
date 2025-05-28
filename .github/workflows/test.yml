@@ -18,7 +18,6 @@ jobs:
         bundle config set --global https://rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.GITHUB_TOKEN }}
     - name: Install dependencies
       run: |
-        bundle lock --add-platform x86_64-linux
         bundle install
     - name: Run tests
       run: |
