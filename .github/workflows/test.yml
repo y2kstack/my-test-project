@@ -14,7 +14,7 @@ jobs:
           ruby-version: '3.0'
       - name: Configure GitHub Packages authentication
         run: |
-          bundle config set --global rubygems.pkg.github.com y2kstack:${{ secrets.PAT }}
+          bundle config set --global rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.PAT }}
       - name: Install dependencies
         run: |
           bundle install
