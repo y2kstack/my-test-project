@@ -14,10 +14,10 @@ jobs:
           ruby-version: '3.0'
       - name: Configure GitHub Packages authentication
         run: |
-          bundle config rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.NEW_PAT }}
+          bundle config rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.MY_PAT }}
       - name: Set up environment variable for Bundler
         run: |
-          echo "BUNDLE_RUBYGEMS__PKG__GITHUB__COM=y2kstack:${{ secrets.NEW_PAT }}" >> $GITHUB_ENV
+          echo "BUNDLE_RUBYGEMS__PKG__GITHUB__COM=y2kstack:${{ secrets.MY_PAT }}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
           bundle install
