@@ -12,7 +12,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-          bundler-cache: true # Caches gems to speed up subsequent runs
       - name: Configure GitHub Packages authentication
         run: |
           bundle config set --global rubygems.pkg.github.com y2kstack:${{ secrets.PAT }}
