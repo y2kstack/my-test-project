@@ -8,11 +8,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: false # Disable caching to avoid automatic bundle lock/install
       - name: Configure GitHub Packages authentication
         env:
           BUNDLE_RUBYGEMS__PKG__GITHUB__COM: y2kstack:${{ secrets.MY_PAT }}
@@ -21,6 +16,11 @@ jobs:
       - name: Debug bundle config
         run: |
           bundle config list
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: false # Disabled to avoid premature bundle commands
       - name: Configure bundle path
         run: |
           bundle config --local path /home/runner/work/my-test-project/my-test-project/vendor/bundle
