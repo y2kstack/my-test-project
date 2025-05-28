@@ -14,10 +14,8 @@ jobs:
           ruby-version: '3.0'
           bundler-cache: true # Caches gems to speed up subsequent runs
       - name: Configure GitHub Packages authentication
-        env:
-          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.PAT }} # Use environment variable for credentials
         run: |
-          bundle config set --global rubygems.pkg.github.com y2kstack:${{ secrets.PAT }}
+          bundle config set --global rubygems.pkg.github.com y2kstack:${{ secrets.BUNDLE_RUBYGEMS__PKG__GITHUB__COM }}
       - name: Install dependencies
         run: |
           bundle install
