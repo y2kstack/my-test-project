@@ -2,34 +2,36 @@ name: Test Project with Struct Definer
 on:
   push:
     branches: [main]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    env: # Define environment variables for the entire job
+      BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "x-access-token:${{ secrets.MY_PAT }}"
+      # Or, if your PAT belongs to a specific user and you prefer to use their username:
+      # BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "your-github-username:${{ secrets.MY_PAT }}"
+      # Generally, "x-access-token" is preferred for PATs.
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Configure GitHub Packages authentication
-        env:
-          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: y2kstack:${{ secrets.MY_PAT }}
-        run: |
-          bundle config rubygems.pkg.github.com "$BUNDLE_RUBYGEMS__PKG__GITHUB__COM"
-      - name: Debug bundle config
-        run: |
-          bundle config list
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-          bundler-cache: false # Disabled to avoid premature bundle commands
-      - name: Configure bundle path
-        run: |
-          bundle config --local path /home/runner/work/my-test-project/my-test-project/vendor/bundle
-      - name: Update Gemfile.lock
-        run: |
-          bundle lock
+          bundler-cache: true # This will now use the job-level BUNDLE_ variable for authentication
+
+      # The "Configure GitHub Packages authentication" step is no longer needed here
+      # because the BUNDLE_ environment variable is set at the job level and ruby/setup-ruby will use it.
+
+      # The "Install dependencies" step might be redundant if bundler-cache: true
+      # successfully installs all dependencies. However, it's harmless to keep.
+      # If bundler-cache only populates the cache but doesn't fully install
+      # into vendor/bundle (depending on exact ruby/setup-ruby behavior for specific scenarios),
+      # this explicit bundle install will ensure it.
       - name: Install dependencies
-        run: |
-          bundle install
+        run: bundle install # This will also use the job-level BUNDLE_ variable
+
       - name: Run tests
-        run: |
-          bundle exec ruby test.rb
+        run: bundle exec ruby test.rb
