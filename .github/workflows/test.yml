@@ -12,12 +12,21 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-          bundler-cache: true # Enable caching for faster runs
+          bundler-cache: false # Disable caching to avoid automatic bundle lock/install
       - name: Configure GitHub Packages authentication
         env:
-          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.MY_PAT }}
+          BUNDLE_RUBYGEMS__PKG__GITHUB__COM: y2kstack:${{ secrets.MY_PAT }}
         run: |
           bundle config set --global rubygems.pkg.github.com "$BUNDLE_RUBYGEMS__PKG__GITHUB__COM"
+      - name: Debug bundle config
+        run: |
+          bundle config list
+      - name: Configure bundle path
+        run: |
+          bundle config --local path /home/runner/work/my-test-project/my-test-project/vendor/bundle
+      - name: Update Gemfile.lock
+        run: |
+          bundle lock
       - name: Install dependencies
         run: |
           bundle install
