@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env: # Define environment variables for the entire job
-      BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "x-access-token:${{ secrets.MY_PAT }}"
+      BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "y2kstack:${{ secrets.MY_PAT }}"
       # Or, if your PAT belongs to a specific user and you prefer to use their username:
       # BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "your-github-username:${{ secrets.MY_PAT }}"
       # Generally, "x-access-token" is preferred for PATs.
