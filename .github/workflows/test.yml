@@ -15,6 +15,9 @@ jobs:
       - name: Configure GitHub Packages authentication
         run: |
           bundle config rubygems.pkg.github.com/y2kstack y2kstack:${{ secrets.PAT }}
+      - name: Set up environment variable for Bundler
+        run: |
+          echo "BUNDLE_RUBYGEMS__PKG__GITHUB__COM=y2kstack:${{ secrets.PAT }}" >> $GITHUB_ENV
       - name: Install dependencies
         run: |
           bundle install
