@@ -39,13 +39,11 @@ jobs:
       # - run: bundle install
 
       - name: SonarQube Scan
-        # You can pin the exact commit or the version.
-        # uses: SonarSource/sonarqube-scan-action@v1.1.0
         uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # For PR info
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}     # Token from SonarQube
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} # Your Nginx public URL
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
         with:
           args: >
