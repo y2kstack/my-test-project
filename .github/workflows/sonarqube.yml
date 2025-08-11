@@ -13,6 +13,8 @@ permissions:
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
+    env: # Define environment variables for the entire job
+      BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "y2kstack:${{ secrets.MY_PAT }}"
 
     steps:
 
