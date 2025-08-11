@@ -43,6 +43,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true # This will now use the job-level BUNDLE_ variable for authentication
+
       - name: Analyze with SonarCloud
 
         # You can pin the exact commit or the version.
