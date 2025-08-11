@@ -17,12 +17,6 @@ jobs:
       BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "y2kstack:${{ secrets.MY_PAT }}"
 
     steps:
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.0'
-          bundler-cache: true # This will now use the job-level BUNDLE_ variable for authentication
-      
       - name: Checkout source
         uses: actions/checkout@v4
 
