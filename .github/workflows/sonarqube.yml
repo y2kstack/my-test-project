@@ -17,7 +17,19 @@ jobs:
       BUNDLE_RUBYGEMS__PKG__GITHUB__COM: "y2kstack:${{ secrets.MY_PAT }}"
 
     steps:
+      - name: Analyze with SonarQube
 
+        # You can pin the exact commit or the version.
+        # uses: SonarSource/sonarqube-scan-action@v1.1.0
+        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          args: >
+            -Dsonar.projectKey=git-test-jp
+        
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -33,18 +45,4 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # If your project needs Ruby (remove if not needed)
-      # - name: Set up Ruby
-      #   uses: ruby/setup-ruby@v1
-      #   with:
-      #     ruby-version: '3.0'
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2.2.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          args: >
-            -Dsonar.projectKey=git-test-jp
