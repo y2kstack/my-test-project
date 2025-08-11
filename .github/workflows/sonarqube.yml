@@ -39,4 +39,13 @@ jobs:
       # - run: bundle install
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@7295e71c9583053f5bf40e9d4068a0c974603ec8
+        uses: sonarsource/sonarqube-scan-action@v2.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # For PR info
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}     # Token from SonarQube
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }} # Your Nginx public URL
+        with:
+          args: >
+            -Dsonar.projectKey=git-test-jp
+            -Dsonar.sources=.
+            -Dsonar.java.binaries=.
