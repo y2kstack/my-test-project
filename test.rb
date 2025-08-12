@@ -6,3 +6,4 @@ serialized = user.serialize
 puts "Serialized: #{serialized}"
 deserialized = StructDefiner::User.deserialize(serialized)
 puts "Deserialized: #{deserialized.name}, #{deserialized.email}"
+puts "Deserialized: #{deserialized.name}, #{deserialized.email}"
